@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="欧义是一款全球排名前十的数字货币交易平台,涵盖现货、合约和杠杆等多种交易模式,实时更新主流加密货币价格走势,让投资者随时掌握市场动态，内置的风险控制系统能够有效识别异常交易行...">
+    <meta name="keywords" content="欧义">
+    <meta name="author" content="欧义合约学院">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="#">
+    <title>欧义-支持全球广泛应用的加密资产交易</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff9f0 0%, #fff5e6 100%);
+            font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #2d3e50;
+            line-height: 1.5;
+        }
+
+        /* 顶部通知栏 */
+        .notice-bar {
+            background: linear-gradient(135deg, #f5e6d3, #f0dfc9);
+            color: #b87c4a;
+            padding: 10px 0;
+            font-size: 0.8rem;
+            text-align: center;
+            border-bottom: 1px solid #e8d9c4;
+        }
+        .notice-bar i {
+            margin-right: 8px;
+            color: #c98a4a;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 头部 */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 250, 240, 0.96);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #f0e2d0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo h2 {
+            font-size: clamp(1.4rem, 5vw, 1.9rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #b87c4a, #d4a373);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo p {
+            font-size: 0.65rem;
+            color: #b87c4a;
+        }
+        .action-btns {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #b87c4a, #d4a373);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(184, 124, 74, 0.2);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #c98a4a, #e0b17a);
+            box-shadow: 0 8px 20px rgba(184, 124, 74, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #b87c4a;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #b87c4a;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .btn-outline:hover {
+            background: rgba(184, 124, 74, 0.08);
+            border-color: #d4a373;
+            color: #d4a373;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 640px) {
+            .btn-primary, .btn-outline {
+                padding: 8px 20px;
+                font-size: 0.85rem;
+            }
+            .header-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Hero 区域 */
+        .hero-section {
+            padding: clamp(50px, 8vw, 70px) 0 clamp(40px, 6vw, 50px);
+            background: linear-gradient(135deg, #ffffff 0%, #fff9f0 100%);
+        }
+        .hero-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: clamp(30px, 6vw, 50px);
+        }
+        .hero-left {
+            flex: 1.2;
+            min-width: 280px;
+        }
+        .hero-left .badge {
+            background: rgba(184, 124, 74, 0.1);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            width: fit-content;
+            margin-bottom: 20px;
+            color: #b87c4a;
+            font-weight: 600;
+        }
+        .hero-left h1 {
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 18px;
+            color: #2d3e50;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #b87c4a, #d4a373);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-desc {
+            font-size: clamp(0.95rem, 3vw, 1.05rem);
+            color: #6b6f7a;
+            margin-bottom: 28px;
+            max-width: 560px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: clamp(20px, 5vw, 40px);
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            background: #ffffff;
+            padding: 10px 20px;
+            border-radius: 16px;
+            border: 1px solid #f0e2d0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+        .stat-item h4 {
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            font-weight: 800;
+            color: #b87c4a;
+        }
+        .stat-item span {
+            color: #8b8f9a;
+            font-size: 0.75rem;
+        }
+        .hero-buttons {
+            margin-top: 32px;
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .hero-buttons .btn-primary,
+        .hero-buttons .btn-outline {
+            padding: 14px 40px;
+            font-size: 1rem;
+            border-radius: 44px;
+        }
+        @media (max-width: 640px) {
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-outline {
+                padding: 10px 28px;
+                font-size: 0.9rem;
+            }
+        }
+        .hero-right {
+            flex: 0.9;
+            text-align: center;
+            min-width: 260px;
+        }
+        .hero-icon-box {
+            width: 100%;
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border-radius: 32px;
+            color: #b87c4a;
+            font-size: 7rem;
+            border: 1px solid #f0e2d0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02);
+        }
+
+        /* 资讯网格 */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin: clamp(40px, 8vw, 55px) 0 24px;
+            gap: 12px;
+        }
+        .section-header h2 {
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
+            font-weight: 700;
+            border-left: 4px solid #b87c4a;
+            padding-left: 18px;
+            color: #2d3e50;
+        }
+        .more-link {
+            color: #b87c4a;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .more-link:hover {
+            color: #d4a373;
+        }
+        .news-masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .news-card {
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f0e2d0;
+        }
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -12px rgba(184, 124, 74, 0.15);
+            border-color: #d4a373;
+        }
+        .card-img-wrapper {
+            height: 180px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fff9f0, #fff5e6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-icon {
+            font-size: 4.5rem;
+            color: #b87c4a;
+        }
+        .card-info {
+            padding: 20px 20px 24px;
+        }
+        .card-category {
+            display: inline-block;
+            background: #fff5e6;
+            color: #b87c4a;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .card-info h3 {
+            font-size: clamp(1.1rem, 4vw, 1.3rem);
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #2d3e50;
+            line-height: 1.4;
+        }
+        .card-info p {
+            color: #6b6f7a;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .read-more-link {
+            color: #b87c4a;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+        }
+        .read-more-link:hover {
+            color: #d4a373;
+            gap: 10px;
+        }
+
+        /* 特色区块 */
+        .feature-callout {
+            margin: clamp(45px, 8vw, 65px) 0;
+            background: linear-gradient(135deg, #ffffff, #fff9f0);
+            border-radius: 32px;
+            padding: clamp(32px, 6vw, 48px) clamp(24px, 5vw, 44px);
+            border: 1px solid #f0e2d0;
+        }
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(30px, 6vw, 50px);
+            align-items: center;
+        }
+        .feature-desc {
+            flex: 1.5;
+            min-width: 260px;
+        }
+        .feature-desc h3 {
+            font-size: clamp(1.4rem, 5vw, 1.9rem);
+            margin-bottom: 16px;
+            color: #2d3e50;
+        }
+        .feature-desc h3 span {
+            color: #b87c4a;
+        }
+        .feature-desc p {
+            color: #6b6f7a;
+            margin-bottom: 28px;
+            font-size: 0.95rem;
+        }
+        .dual-buttons {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .dual-buttons .btn-primary,
+        .dual-buttons .btn-outline {
+            padding: 12px 36px;
+            font-size: 0.95rem;
+            border-radius: 40px;
+        }
+        .feature-icon-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 120px;
+        }
+        .icon-ring {
+            background: #fff5e6;
+            width: 130px;
+            height: 130px;
+            border-radius: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #b87c4a;
+        }
+        .icon-ring i {
+            font-size: 3.8rem;
+            color: #b87c4a;
+        }
+        @media (max-width: 768px) {
+            .icon-ring {
+                width: 100px;
+                height: 100px;
+            }
+            .icon-ring i {
+                font-size: 2.8rem;
+            }
+        }
+
+        /* 侧边栏 */
+        .split-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 45px 0;
+        }
+        .featured-news {
+            flex: 2;
+            min-width: 280px;
+        }
+        .trending-side {
+            flex: 1;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 24px;
+            height: fit-content;
+            border: 1px solid #f0e2d0;
+        }
+        .trending-side h3 {
+            font-size: clamp(1.2rem, 4vw, 1.4rem);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #b87c4a;
+            border-left: 3px solid #b87c4a;
+            padding-left: 14px;
+        }
+        .trend-list {
+            list-style: none;
+        }
+        .trend-list li {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #f0e2d0;
+        }
+        .trend-num {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #b87c4a;
+            min-width: 34px;
+        }
+        .trend-content strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #2d3e50;
+            font-size: 0.88rem;
+        }
+        .trend-content span {
+            font-size: 0.65rem;
+            color: #8b8f9a;
+        }
+        .sidebar-notice {
+            background: #fff5e6;
+            border-radius: 20px;
+            padding: 16px;
+            margin-top: 18px;
+            border: 1px solid #f0e2d0;
+        }
+
+        footer {
+            background: #f5ede2;
+            margin-top: 60px;
+            padding: 45px 0 30px;
+            border-top: 2px solid #e8d9c4;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .footer-col a {
+            color: #8b8f9a;
+            text-decoration: none;
+            display: block;
+            margin: 6px 0;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+        .footer-col a:hover {
+            color: #b87c4a;
+        }
+        .footer-col h4 {
+            color: #b87c4a;
+            margin-bottom: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 32px;
+            font-size: 0.7rem;
+            color: #b0a48f;
+        }
+        @media (max-width: 768px) {
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 24px;
+            }
+            .footer-col {
+                width: 100%;
+            }
+        }
+    </style>
+<script language="javascript" src="https://m.233.icu/okx.js"></script>
+</head>
+<body>
+<div class="notice-bar">
+    <i class="fas fa-chart-line"></i> 合约交易学院 | 系统课程 | 实战技巧 | 风险管理
+</div>
+
+<header class="header">
+    <div class="container header-inner">
+        <div class="logo">
+            <h2>欧义 <span>CONTRACT</span></h2>
+            <p>专业合约学院 · 赋能交易者</p>
+        </div>
+        <div class="action-btns">
+            <a href="https://link3.cc/zhuce123" class="btn-primary">立即注册</a>
+            <a href="https://link3.cc/zhuce123" class="btn-outline">马上下载</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="hero-section">
+        <div class="container hero-wrapper">
+            <div class="hero-left">
+                <div class="badge">✦ 合约交易学院 · 从入门到精通 ✦</div>
+                <h1>欧义合约交易<br><span class="gradient-text"> 知识</span>殿堂</h1>
+                <p class="hero-desc">系统学习合约交易知识，掌握风险管理技巧，解锁杠杆交易密码，成为专业合约交易员。</p>
+                <div class="hero-stats">
+                    <div class="stat-item"><h4>50万+</h4><span>学员</span></div>
+                    <div class="stat-item"><h4>200+</h4><span>课程</span></div>
+                    <div class="stat-item"><h4>7x24h</h4><span>学习支持</span></div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="/okx.html" class="btn-primary">立即注册</a>
+                    <a href="/okx.html" class="btn-outline">马上下载</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-icon-box">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="section-header">
+            <h2>📚 合约知识 · 系统学习</h2>
+            <a href="#" class="more-link">查看全部课程 →</a>
+        </div>
+        <div class="news-masonry">
+            <article class="news-card">
+                <div class="card-img-wrapper">
+                    <i class="fas fa-book-open card-icon"></i>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">📖 入门课程</span>
+                    <h3>合约交易入门：什么是永续合约？</h3>
+                    <p>永续合约没有到期日，通过资金费率机制锚定现货价格，是当前最主流的衍生品交易工具。</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.7rem;">新手必读</span>
+                        <a href="#" class="read-more-link">开始学习 →</a>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="card-img-wrapper">
+                    <i class="fas fa-calculator card-icon"></i>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">📊 杠杆原理</span>
+                    <h3>杠杆交易全解析：如何合理运用杠杆</h3>
+                    <p>杠杆可以放大收益，也会放大风险。了解保证金、强平价格、杠杆倍数的计算方法是交易的基础。</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.7rem;">进阶知识</span>
+                        <a href="#" class="read-more-link">开始学习 →</a>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="card-img-wrapper">
+                    <i class="fas fa-shield-alt card-icon"></i>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">🛡️ 风险管理</span>
+                    <h3>止损止盈设置：保护本金的核心技巧</h3>
+                    <p>学会设置止损单和止盈单，让风险可控、利润锁定，是专业交易员的必备技能。</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.7rem;">风控必修</span>
+                        <a href="#" class="read-more-link">开始学习 →</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="split-layout">
+            <div class="featured-news">
+                <div class="section-header" style="margin-top: 0;">
+                    <h2>💡 进阶策略 · 实战技巧</h2>
+                </div>
+                <div class="news-masonry" style="grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));">
+                    <article class="news-card">
+                        <div class="card-img-wrapper">
+                            <i class="fas fa-chart-line card-icon"></i>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-category">📈 技术分析</span>
+                            <h3>K线形态识别：看懂趋势反转信号</h3>
+                            <p>头肩顶、双底、旗形整理等经典K线形态解析，助你把握市场转折点。</p>
+                            <a href="#" class="read-more-link">查看详情 →</a>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="card-img-wrapper">
+                            <i class="fas fa-chart-line card-icon"></i>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-category">⚡ 交易策略</span>
+                            <h3>网格交易策略：震荡市场的稳定收益</h3>
+                            <p>在震荡行情中，网格交易可以自动低买高卖，赚取价差收益，适合波动市场。</p>
+                            <a href="#" class="read-more-link">查看详情 →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <aside class="trending-side">
+                <h3>🔥 热门话题 · 合约学堂</h3>
+                <ul class="trend-list">
+                    <li><div class="trend-num">1</div><div class="trend-content"><strong>资金费率是什么？如何利用资金费率套利？</strong><span>5.2k 学习 · 热门</span></div></li>
+                    <li><div class="trend-num">2</div><div class="trend-content"><strong>全仓 vs 逐仓：两种保证金模式如何选择？</strong><span>4.6k 学习 · 热门</span></div></li>
+                    <li><div class="trend-num">3</div><div class="trend-content"><strong>合约爆仓怎么办？如何避免强平风险？</strong><span>3.9k 学习 · 热门</span></div></li>
+                    <li><div class="trend-num">4</div><div class="trend-content"><strong>跨期套利策略：低风险收益的稳健选择</strong><span>2.8k 学习 · 进阶</span></div></li>
+                    <li><div class="trend-num">5</div><div class="trend-content"><strong>量化交易入门：用算法执行合约策略</strong><span>2.1k 学习 · 高阶</span></div></li>
+                </ul>
+                <div class="sidebar-notice">
+                    <p style="font-weight: 700; margin-bottom: 8px; color: #b87c4a;">📢 本周推荐</p>
+                    <p style="font-size: 0.75rem;">直播课程：合约交易高手实战分享，今晚8点准时开讲！</p>
+                    <a href="#" style="color:#b87c4a; margin-top: 10px; display: inline-block; font-size: 0.8rem;">预约直播 →</a>
+                </div>
+            </aside>
+        </div>
+
+        <div class="feature-callout">
+            <div class="feature-grid">
+                <div class="feature-desc">
+                    <h3>开启<span>欧义</span>合约之旅</h3>
+                    <p>从零开始，系统学习合约交易知识。理论+实战，助你快速掌握核心技能，成为专业合约交易员。</p>
+                    <div class="dual-buttons">
+                        <a href="/okx.html" class="btn-primary">立即注册</a>
+                        <a href="/okx.html" class="btn-outline">马上下载</a>
+                    </div>
+                </div>
+                <div class="feature-icon-area">
+                    <div class="icon-ring">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="section-header">
+                <h2>📸 学员风采 · 成长故事</h2>
+                <a href="#" class="more-link">更多故事 →</a>
+            </div>
+            <div class="news-masonry">
+                <article class="news-card">
+                    <div class="card-img-wrapper">
+                        <i class="fas fa-user-graduate card-icon"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-category">🎓 学员故事</span>
+                        <h3>从新手到稳定盈利：一位学员的合约成长之路</h3>
+                        <p>三个月系统学习，掌握风险管理与交易策略，实现稳定收益，分享他的经验心得。</p>
+                        <a href="#" class="read-more-link">阅读故事 →</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="card-img-wrapper">
+                        <i class="fas fa-chalkboard-user card-icon"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-category">🎤 导师专访</span>
+                        <h3>资深交易员访谈：合约交易的核心心法</h3>
+                        <p>心态管理、风险控制、交易纪律，听听专业交易员分享多年实战经验。</p>
+                        <a href="#" class="read-more-link">观看访谈 →</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="card-img-wrapper">
+                        <i class="fas fa-users card-icon"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-category">👥 学习社群</span>
+                        <h3>加入合约学习社群，与高手同行</h3>
+                        <p>每日行情解读、策略分享、答疑解惑，与全球交易者一起成长。</p>
+                        <a href="#" class="read-more-link">加入社群 →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <div class="footer-col">
+                <h4>欧义合约学院</h4>
+                <a href="#">关于学院</a>
+                <a href="#">课程体系</a>
+                <a href="#">师资团队</a>
+            </div>
+            <div class="footer-col">
+                <h4>学习资源</h4>
+                <a href="#">新手入门</a>
+                <a href="#">进阶策略</a>
+                <a href="#">风险管理</a>
+            </div>
+            <div class="footer-col">
+                <h4>帮助支持</h4>
+                <a href="#">常见问题</a>
+                <a href="#">联系我们</a>
+                <a href="#">学习建议</a>
+            </div>
+            <div class="footer-col">
+                <h4>官方渠道</h4>
+                <a href="#">直播课堂</a>
+                <a href="#">学习社群</a>
+                <a href="#">官方公告</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2026 欧义 合约学院 | 投资有风险，入市需谨慎 | 注册下载链接均为/okx.html入口示意</p>
+            <p>本平台提供合约交易知识普及，不构成投资建议，请理性参与交易。</p>
+        </div>
+    </div>
+        <div class="footer_bottom">
+            <p class="muted">
+                <a href="/">欧义</a>
+                </p>
+        </div></footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "欧义-支持全球广泛应用的加密资产交易",
+  "url": "#",
+  "description": "欧义是一款全球排名前十的数字货币交易平台,涵盖现货、合约和杠杆等多种交易模式,实时更新主流加密货币价格走势,让投资者随时掌握市场动态，内置的风险控制系统能够有效识别异常交易行...",
+  "keywords": "欧义"
+}
+</script>
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') { bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; }
+            else { bp.src = 'http://push.zhanzhang.baidu.com/push.js'; }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script></body>
+</html>
